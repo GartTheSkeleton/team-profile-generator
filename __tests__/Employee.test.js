@@ -7,5 +7,5 @@ test('creates an employee object', () => {
     expect(employee.id).toEqual(expect.any(Number));
     expect(employee.email).toBe('email')
 
-    expect(employee.getRoll()).toBe('employee')
+    expect(employee.getRoll()).toBe('Employee')
   });
