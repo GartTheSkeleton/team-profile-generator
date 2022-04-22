@@ -1,0 +1,24 @@
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.subcontainer{
+    /* display: flex; */
+    width: 60%;
+    /* flex-wrap: wrap; */
+    justify-content: center;
+}
+
+.manager{
+    background-color: aqua;
+}
+
+.engineer{
+    background-color: darkkhaki;
+}
+
+.intern{
+    background-color: lightpink;
+}

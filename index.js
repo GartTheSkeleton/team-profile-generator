@@ -281,10 +281,10 @@ let endApp = function()
         const pageHTML = generatePage(teamRoster);
 
         console.log(pageHTML);
-            //fs.writeFile('./dist/index.html', pageHTML, err => {
-            //  if (err) throw new Error(err);
-            //  console.log('Page created! Check out index.html in the /dist directory to see it!');
-            //});
+            fs.writeFile('./dist/index.html', pageHTML, err => {
+              if (err) throw new Error(err);
+              console.log('Page created! Check out index.html in the /dist directory to see it!');
+            });
     }
 
 let init = function() {
