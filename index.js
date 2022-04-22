@@ -12,14 +12,22 @@ let email = ''
 let office = ''
 let github = ''
 let school = ''
+let roll = ''
+
+let newEmployee = ''
+
+let teamRoster = [];
 
 let clearData = function(){
-    let name = ''
-    let id = ''
-    let email = ''
-    let office = ''
-    let github = ''
-    let school = ''
+    name = ''
+    id = ''
+    email = ''
+    office = ''
+    github = ''
+    school = ''
+    roll = ''
+
+    newEmployee = ''
 }
 
 
@@ -86,35 +94,190 @@ const switchQuestion = [
         choices: ["Add Engineer", "Add Intern", "Finish and Generare HTML"]
     }
 ]
-
+const engineerQuestions = [
+    {
+      type: 'input',
+      name: 'name',
+      message: "What is your Engineer's name?",
+      validate: name => {
+        if (name) {
+          return true;
+        } else {
+          console.log("Please enter your Engineer's name!");
+          return false;
+        }
+      }
+    },
+    {
+      type: 'input',
+      name: 'id',
+      message: "What is your Engineer's ID?",
+      validate: id => {
+        if (id) {
+          return true;
+        } else {
+          console.log('Please enter your Engineer ID!');
+          return false;
+        }
+      }
+    },
+    {
+      type: 'input',
+      name: 'email',
+      message: "What is your Engineer's email address?",
+      validate: email => {
+        if (email) {
+          return true;
+        } else {
+          console.log('Please enter your Engineer email!');
+          return false;
+        }
+      }
+    },
+    {
+      type: 'input',
+      name: 'github',
+      message: "What is your Engineer's GitHub username?",
+      validate: office => {
+        if (office) {
+          return true;
+        } else {
+          console.log("Please enter your Engineer's GitHub!");
+          return false;
+        }
+      }
+    }
+  ];
+  const internQuestions = [
+    {
+      type: 'input',
+      name: 'name',
+      message: "What is your Intern's name?",
+      validate: name => {
+        if (name) {
+          return true;
+        } else {
+          console.log("Please enter your Intern's name!");
+          return false;
+        }
+      }
+    },
+    {
+      type: 'input',
+      name: 'id',
+      message: "What is your Intern's ID?",
+      validate: id => {
+        if (id) {
+          return true;
+        } else {
+          console.log("Please enter your Intern's ID!");
+          return false;
+        }
+      }
+    },
+    {
+      type: 'input',
+      name: 'email',
+      message: "What is your Intern's email address?",
+      validate: email => {
+        if (email) {
+          return true;
+        } else {
+          console.log("Please enter your Intern's email!");
+          return false;
+        }
+      }
+    },
+    {
+      type: 'input',
+      name: 'school',
+      message: "What is your Intern's school?",
+      validate: school => {
+        if (school) {
+          return true;
+        } else {
+          console.log("Please enter your Intern's school!");
+          return false;
+        }
+      }
+    }
+  ];
 
 //Once this is done, create the manager object using Manager.js and feeding it the answers
 let createManager = function()
   {
-    let newEmployee = new Manager(name, id, email, office)
+    newEmployee = new Manager(name, id, email, office);
 
-    console.log(newEmployee);
+    teamRoster.push(newEmployee);
+
+    console.log(teamRoster);
+
+    switchMenu();
   }
 
 //Menu to add an Engineer or Intern or Finish
 let switchMenu = function()
   {
-
+    inquirer.prompt(switchQuestion).then(inquirerResponses => {
+        let switchAnswer = inquirerResponses.switch;
+        switch (switchAnswer) {
+            case "Add Engineer":
+                createEngineer();
+                break;
+            case "Add Intern":
+                createIntern();
+                break;
+            case "Finish and Generare HTML":
+                endApp();
+                break;
+        }
+    });
   }
-
+ 
 //Engineer module
-//First prompt name
-//Second prompt ID
-//Third prompt email
+let createEngineer = function()
+    {
+        inquirer.prompt(engineerQuestions).then(inquirerResponses => {
+            clearData();
+            name = inquirerResponses.name
+            id = inquirerResponses.id
+            email = inquirerResponses.email
+            github = inquirerResponses.github
+            //create the employee object
+            newEmployee = new Engineer(name, id, email, github)
+            //push object into the team roster
+            teamRoster.push(newEmployee);
+            //console log the roster for safety
+            console.log(teamRoster);
+            //return to the switch menu
+            switchMenu();
+        })
+    }
 
-//if Engineer then prompt github
-//return to menu
-
-//if intern then prompt school
-//return to menu
-
+//Intern module
+let createIntern = function()
+    {
+        inquirer.prompt(internQuestions).then(inquirerResponses => {
+            clearData();
+            name = inquirerResponses.name
+            id = inquirerResponses.id
+            email = inquirerResponses.email
+            school = inquirerResponses.github
+            //create the employee object
+            newEmployee = new Engineer(name, id, email, github)
+            //push object into the team roster
+            teamRoster.push(newEmployee);
+            //console log the roster for safety
+            console.log(teamRoster);
+            //return to the switch menu
+            switchMenu();
+        })
+    }
 //if finish
-//end app and generate html
+let endApp = function()
+    {
+        console.log("Generating HTML....")
+    }
 
 let init = function() {
     inquirer.prompt(managerQuestions).then(inquirerResponses => {
