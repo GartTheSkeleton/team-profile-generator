@@ -262,9 +262,9 @@ let createIntern = function()
             name = inquirerResponses.name
             id = inquirerResponses.id
             email = inquirerResponses.email
-            school = inquirerResponses.github
+            school = inquirerResponses.school
             //create the employee object
-            newEmployee = new Engineer(name, id, email, github)
+            newEmployee = new Intern(name, id, email, school)
             //push object into the team roster
             teamRoster.push(newEmployee);
             //console log the roster for safety
@@ -277,6 +277,14 @@ let createIntern = function()
 let endApp = function()
     {
         console.log("Generating HTML....")
+        
+        const pageHTML = generatePage(teamRoster);
+
+        console.log(pageHTML);
+            //fs.writeFile('./dist/index.html', pageHTML, err => {
+            //  if (err) throw new Error(err);
+            //  console.log('Page created! Check out index.html in the /dist directory to see it!');
+            //});
     }
 
 let init = function() {
